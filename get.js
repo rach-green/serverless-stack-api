@@ -2,20 +2,27 @@ import handler from "./libs/handler-lib";
 import dynamoDb from "./libs/dynamodb-lib";
 
 export const main = handler(async (event, context) => {
+    const temperature = event.pathParameters.temp;
+    const hotCutoff = 75;
+    const coldCutoff = 50;
+    var myFilterExpression = "Cold = :t AND Precip = :precip";
+    if (temperature < hotCutoff & temperature > coldCutoff){
+        myFilterExpression = "Temperate = :t AND Precip = :precip";
+    }
+    else if(temperature >= hotCutoff){
+        myFilterExpression = "Hot = :t AND Precip = :precip";
+    }
   const params = {
-    TableName: process.env.tableName,
-    // 'Key' defines the partition key and sort key of the item to be retrieved
-    Key: {
-      userid: event.requestContext.identity.cognitoIdentityId, // The id of the author
-      noteid: event.pathParameters.id, // The id of the note from the path
-    },
+    TableName: event.pathParameters.tableName,
+    FilterExpression: myFilterExpression,
+    ExpressionAttributeValues: {
+        ':precip' : event.pathParameters.precip,
+        ':t' : 'Y'
+    }
   };
 
-  const result = await dynamoDb.get(params);
-  if (!result.Item) {
-    throw new Error("Item not found.");
-  }
-
-  // Return the retrieved item
-  return result.Item;
+  const result = await dynamoDb.scan(params);
+  // Return the matching list of items in response body
+  result.Items.forEach((item) => console.log(item));
+  return result.Items[0];
 });
