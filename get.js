@@ -5,12 +5,12 @@ export const main = handler(async (event, context) => {
     const temperature = event.pathParameters.temp;
     const hotCutoff = 75;
     const coldCutoff = 50;
-    var myFilterExpression = "Cold = :t AND Precip = :precip";
+    var myFilterExpression = "cold = :t AND precip = :precip";
     if (temperature < hotCutoff & temperature > coldCutoff){
-        myFilterExpression = "Temperate = :t AND Precip = :precip";
+        myFilterExpression = "temperate = :t AND precip = :precip";
     }
     else if(temperature >= hotCutoff){
-        myFilterExpression = "Hot = :t AND Precip = :precip";
+        myFilterExpression = "hot = :t AND precip = :precip";
     }
   const params = {
     TableName: event.pathParameters.tableName,

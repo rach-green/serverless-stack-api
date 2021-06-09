@@ -1,4 +1,4 @@
-// import * as uuid from "uuid";
+import * as uuid from "uuid";
 import handler from "./libs/handler-lib";
 import dynamoDb from "./libs/dynamodb-lib";
 
@@ -9,7 +9,7 @@ export const main = handler(async (event, context) => {
     TableName: data.tableName,
     Item: {
       // The attributes of the item to be created
-      FoodID: 0o50, // A unique uuid
+      id: uuid.v1(), // A unique uuid
       cold: data.cold, // Parsed from request body
       hot: data.hot, // Parsed from request body
       temperate: data.temperate,
