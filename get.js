@@ -22,7 +22,8 @@ export const main = handler(async (event, context) => {
   };
 
   const result = await dynamoDb.scan(params);
-  // Return the matching list of items in response body
-  result.Items.forEach((item) => console.log(item));
-  return result.Items[0];
+  console.log(result);
+  //should generate an index between 0 and result.Count - 1
+  const index = Math.floor(Math.random() * (result.Count));
+  return result.Items[index];
 });

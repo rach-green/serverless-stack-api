@@ -1,7 +1,7 @@
 {
     "pathParameters": {
-      "tableName": "tahoe-food",
-      "temp":  95,
+      "tableName": "tahoe-food-1",
+      "temp":  65,
       "precip": "Y"
     }
   }
