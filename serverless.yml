@@ -45,7 +45,7 @@ functions:
           path: tahoe
           method: post
           cors: true
-          # authorizer: aws_iam
+          authorizer: aws_iam
  
 
   get:
@@ -58,7 +58,7 @@ functions:
           path: tahoe/{tableName}/{temp}/{precip}
           method: get
           cors: true
-          # authorizer: aws_iam
+          authorizer: aws_iam
 
 # Create our resources with separate CloudFormation templates
 resources:

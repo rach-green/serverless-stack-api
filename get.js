@@ -24,41 +24,42 @@ export const main = handler(async (event, context) => {
 
   const result = await dynamoDb.scan(params);
   console.log(result);
-  // if (result.Count == 0){
-  //   if(tableName == "tahoe-food-1"){
-  //     var params = {
-  //       TableName: 'tahoe-food-1',
-  //       Key: {
-  //         'KEY_NAME': {id: '8594d342-cae5-11eb-b8bc-0242ac130003'}
-  //       }
-  //     };
-  //     const res = await dynamoDb.get(params);
-  //     return res;
-  //   }
-  //   else if(tableName == "tahoe-activities-1"){
-  //     var params = {
-  //       TableName: 'tahoe-activities-1',
-  //       Key: {
-  //         'KEY_NAME': {id: '65de5f00-cae5-11eb-b8bc-0242ac130003'}
-  //       }
-  //     };
-  //     const res = await dynamoDb.get(params);
-  //     return res;
-  //   }
-  //   else{
-  //     var params = {
-  //       TableName: 'tahoe-songs-1',
-  //       Key: {
-  //         'KEY_NAME': {id: 'ab2414ba-cae5-11eb-b8bc-0242ac130003'}
-  //       }
-  //     };
-  //     const res = await dynamoDb.get(params);
-  //     return res;
-  //   }
-  // }
-  // else{
-  //   const index = Math.floor(Math.random() * (result.Count));
-  // }
-  const index = Math.floor(Math.random() * (result.Count));
-  return result.Items[index];
+  if (result.Count == 0){
+    if(tableName == "tahoe-food-1"){
+      var default_param = {
+        TableName: 'tahoe-food-1',
+        Key: {
+          id: '8594d342-cae5-11eb-b8bc-0242ac130003'
+        }
+      };
+      const res = await dynamoDb.get(default_param);
+      return res;
+    }
+    else if(tableName == "tahoe-activities-1"){
+      default_param = {
+        TableName: 'tahoe-activities-1',
+        Key: {
+          id: '65de5f00-cae5-11eb-b8bc-0242ac130003'
+        }
+      };
+      const res = await dynamoDb.get(default_param);
+      return res;
+    }
+    else{
+      default_param = {
+        TableName: 'tahoe-songs-1',
+        Key: {
+          id: 'ab2414ba-cae5-11eb-b8bc-0242ac130003'
+        }
+      };
+      const res = await dynamoDb.get(default_param);
+      return res;
+    }
+  }
+  else{
+    const index = Math.floor(Math.random() * (result.Count));
+    return result.Items[index];
+  }
+  // const index = Math.floor(Math.random() * (result.Count));
+  // return result.Items[index];
 });
