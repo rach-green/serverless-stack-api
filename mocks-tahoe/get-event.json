@@ -2,6 +2,9 @@
     "pathParameters": {
       "tableName": "tahoe-food-1",
       "temp":  65,
-      "precip": "Y"
+      "precip": "Y",
+      "photo": "dummy_photo",
+      "song": "dummy_song"
+
     }
   }

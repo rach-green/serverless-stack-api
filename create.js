@@ -14,7 +14,9 @@ export const main = handler(async (event, context) => {
       hot: data.hot, // Parsed from request body
       temperate: data.temperate,
       precip: data.precip,
-      name: data.name
+      name: data.name,
+      photo: data.photo,
+      songLink: data.songLink
     },
   };
   await dynamoDb.put(params);

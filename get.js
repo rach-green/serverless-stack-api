@@ -24,6 +24,8 @@ export const main = handler(async (event, context) => {
   const result = await dynamoDb.scan(params);
   console.log(result);
   //should generate an index between 0 and result.Count - 1
+  //match next best thing
+  //day of the week 
   const index = Math.floor(Math.random() * (result.Count));
   return result.Items[index];
 });
