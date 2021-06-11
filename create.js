@@ -16,7 +16,8 @@ export const main = handler(async (event, context) => {
       precip: data.precip,
       name: data.name,
       photo: data.photo,
-      songLink: data.songLink
+      songLink: data.songLink,
+      description: data.description
     },
   };
   await dynamoDb.put(params);
